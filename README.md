@@ -60,9 +60,7 @@ ActiveRecord::Base.logger = nil
 
 
 
-do i have to create the database first? 
-you have to create the migrations first using the rake command 
-then you build out the files with what you want the tables to look like that associate to the classes you are going to build. 
 
-what is a schema file used for? 
-how do i create it? 
+
+Where do i build my methods? Do i build them in the classes? Do i use activerecord? 
+How do I build the method that allows an existing user to buy a stock? Then that user will be able to know which stock he bought forever. 
