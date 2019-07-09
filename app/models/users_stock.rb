@@ -1,4 +1,4 @@
-class StockUser < ActiveRecord::Base
+class UsersStock < ActiveRecord::Base
 
     belongs_to :users 
     belongs_to :stocks 
