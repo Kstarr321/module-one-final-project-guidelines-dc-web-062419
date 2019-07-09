@@ -57,3 +57,9 @@ Projects need to be approved prior to launching into them, so take some time to 
 # in config/environment.rb add this line:
 ActiveRecord::Base.logger = nil
 ```
+
+
+
+do i have to create the database first? 
+you have to create the migrations first using the rake command 
+then you build out the files with what you want the tables to look like that associate to the classes you are going to build. 
