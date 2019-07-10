@@ -10,5 +10,5 @@ username_checker(user_input)
 
 user_menu_opt = gets.chomp 
 # I need a method with 4 methods wrapped into it corresponding to each options. The method will check the number selected and run the appropriate method corresponding to the inputted number. It will first need to be converted to an integer. I will also need a failsafe in place in case the input is not a number or it's a number that is less than 1 or greater than four 
-
+# binding.pry
 runner(user_menu_opt, user_obj)

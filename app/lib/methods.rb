@@ -43,14 +43,12 @@ def stock_buyer(user_obj)
     puts "Please enter a lowercase 4-letter ticker symbol of what you would like to buy: "
     ticker = gets.chomp
     user_obj.buy_stock(ticker)
-
 end 
 
 
 
 
 def runner(num, user_obj)
-
     if num.to_i == nil 
         puts "Sorry....that is an incorrect input"
     elsif num.to_i == 1 
@@ -58,10 +56,10 @@ def runner(num, user_obj)
     elsif num.to_i == 2 
         stock_buyer(user_obj)
     elsif num.to_i == 3 
-        if user_obj.show_owned_stocks == []
+        if user_obj.stocks.empty?
             puts "Whoops! It looks like you don't own any stocks!"
         else 
-            user_obj.show_owned_stocks
+            user_obj.show_owned_stocks 
         end 
     elsif num.to_i == 4 
         puts "Thanks for using our platform! Goodbye!"
