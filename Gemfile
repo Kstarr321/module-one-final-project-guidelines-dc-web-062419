@@ -10,6 +10,7 @@ gem 'pry'
 gem 'rake'
 gem 'database_cleaner'
 gem 'faker'
+gem 'pastel'
 
 
 # what other gems do i need to install? 
