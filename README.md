@@ -67,4 +67,4 @@ ActiveRecord::Base.logger = nil
   #- a way to create a user if the username does not currently exist 
   #- 
 
-  #create a method that asks the user if they would like to buy one stock or sell all of a specified current stock
+  

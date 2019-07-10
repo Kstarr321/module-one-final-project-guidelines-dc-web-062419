@@ -21,7 +21,7 @@ def no_username_error
     puts "Sorry...we couldn't find that username. Program ending......."
 end
 
-def username_checker(str) #This method is only returning the names of user's that actually own stocks(PROBLEM)
+def username_checker(str) 
     obj = User.find_by username: str 
     if obj == nil 
         no_username_error
@@ -56,12 +56,18 @@ def stock_buyer(user_obj)
     puts "Please enter a lowercase 4-letter ticker symbol of what you would like to buy: "
     ticker = gets.chomp
     user_obj.buy_stock(ticker)
+    puts "                        "
+    puts "                        "
+    puts "Order Confirmation: #{ticker.upcase}(BUY 1 SH) >>>>>> COMPLETE"
 end
 
 def stock_seller(user_obj)
     puts "Please enter a lowercase 4-letter ticker symbol that you own to sell_all"
     ticker = gets.chomp 
     user_obj.sell_all_stock(ticker)
+    puts "                        "
+    puts "                        "
+    puts "Order Confirmation: #{ticker.upcase}(SELL ALL) >>>>>> COMPLETE"
 end 
 
 def stock_mover(obj)
@@ -69,20 +75,12 @@ def stock_mover(obj)
     opt = gets.chomp 
     if opt == 'buy'
         stock_buyer(obj)
-    elsif opt == sell 
+    elsif opt == 'sell'
         stock_seller(obj)
     else 
         puts "Invalid Input"
     end 
-
-
-
 end 
-
-
- 
-
-
 
 def runner(num, user_obj)
     if num.to_i == nil 
