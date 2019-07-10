@@ -19,14 +19,13 @@ end
 def username_checker(str) #This method is only returning the names of user's that actually own stocks(PROBLEM)
     obj = User.find_by username: str 
     if obj == nil 
-        
         no_username_error
     else
-        
         puts "********************************"
         puts "Hello #{obj.name}. Welcome back!"
         puts "********************************"
         puts "                                "
+        display_menu
     end 
 end 
 
@@ -40,16 +39,30 @@ def display_menu
     puts "4. End program"
 end 
 
-def runner(num)
+def stock_buyer(user_obj)
+    puts "Please enter a lowercase 4-letter ticker symbol of what you would like to buy: "
+    ticker = gets.chomp
+    user_obj.buy_stock(ticker)
+
+end 
+
+
+
+
+def runner(num, user_obj)
 
     if num.to_i == nil 
         puts "Sorry....that is an incorrect input"
     elsif num.to_i == 1 
         return_stock_tickers
     elsif num.to_i == 2 
-        #RUN METHOD TO BUY STOCKS 
+        stock_buyer(user_obj)
     elsif num.to_i == 3 
-        #RUN METHOD THAT SHOWS THIS SUER'S OWNED STOCKS 
+        if user_obj.show_owned_stocks == []
+            puts "Whoops! It looks like you don't own any stocks!"
+        else 
+            user_obj.show_owned_stocks
+        end 
     elsif num.to_i == 4 
         puts "Thanks for using our platform! Goodbye!"
     else 

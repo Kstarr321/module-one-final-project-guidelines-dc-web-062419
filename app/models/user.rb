@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
    end 
 
    def show_owned_stocks
-     self.stocks
+     self.stocks.each {|stock| puts "#{stock.ticker.upcase} >> Price: $#{stock.price}"}
    end 
 
     
