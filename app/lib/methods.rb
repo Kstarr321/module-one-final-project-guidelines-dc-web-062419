@@ -5,10 +5,15 @@ def return_stock_tickers
 end 
 
 def greeting
+    puts "_________________________________________"
+    puts "_________________________________________"
+    puts "_________________________________________"
+    puts "                                         "
     puts "Hello, welcome to Kolton's Stock Exchange"
     puts "_________________________________________"
     puts "_________________________________________"
     puts "_________________________________________"
+    puts "                                         "
     puts "Please type in your username to continue: "
 end 
 
@@ -39,12 +44,43 @@ def display_menu
     puts "4. End program"
 end 
 
+def stock_mover_menu
+    puts ">>>>>>>>>"
+    puts "Would you like to buy a stock or sell all of one of your current stocks?"
+    puts ">>>>>>>>>" 
+    puts "Please enter: buy/sell"
+
+end 
+
 def stock_buyer(user_obj)
     puts "Please enter a lowercase 4-letter ticker symbol of what you would like to buy: "
     ticker = gets.chomp
     user_obj.buy_stock(ticker)
+end
+
+def stock_seller(user_obj)
+    puts "Please enter a lowercase 4-letter ticker symbol that you own to sell_all"
+    ticker = gets.chomp 
+    user_obj.sell_all_stock(ticker)
 end 
 
+def stock_mover(obj)
+    stock_mover_menu
+    opt = gets.chomp 
+    if opt == 'buy'
+        stock_buyer(obj)
+    elsif opt == sell 
+        stock_seller(obj)
+    else 
+        puts "Invalid Input"
+    end 
+
+
+
+end 
+
+
+ 
 
 
 
@@ -54,7 +90,7 @@ def runner(num, user_obj)
     elsif num.to_i == 1 
         return_stock_tickers
     elsif num.to_i == 2 
-        stock_buyer(user_obj)
+        stock_mover(user_obj)
     elsif num.to_i == 3 
         if user_obj.stocks.empty?
             puts "Whoops! It looks like you don't own any stocks!"

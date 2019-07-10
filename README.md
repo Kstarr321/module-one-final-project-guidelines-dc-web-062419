@@ -61,6 +61,10 @@ ActiveRecord::Base.logger = nil
 
 
 
+# problems I currently have 
+  #- there is no looping construct to keep the application running when given an invalid input 
+  #- when/where/ and how to wrap my methods together for a smooth program launch
+  #- a way to create a user if the username does not currently exist 
+  #- 
 
-Where do i build my methods? Do i build them in the classes? Do i use activerecord? 
-How do I build the method that allows an existing user to buy a stock? Then that user will be able to know which stock he bought forever. 
+  #create a method that asks the user if they would like to buy one stock or sell all of a specified current stock
