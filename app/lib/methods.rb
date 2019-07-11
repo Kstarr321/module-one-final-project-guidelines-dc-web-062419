@@ -5,6 +5,18 @@ def return_stock_tickers
     end 
 end  
 
+def print_logo
+    data = [
+        { name: 'PEACE', value: 1, color: :bright_green, fill: 'X' },
+        { name: 'LOVE', value: 1, color: :bright_red, fill: 'X' },
+        { name: 'POSITIVITY', value: 1, color: :bright_white, fill: 'X' },
+        { name: 'HARD WORK', value: 1, color: :bright_cyan, fill: 'X' }
+      ]
+      pie_chart = TTY::Pie.new(data: data, left: 50, top: 10)
+      print pie_chart
+
+end 
+
 def greeting
     pastel = Pastel.new 
     puts pastel.decorate("_________________________________________", :on_bright_red, :bold)
@@ -146,9 +158,14 @@ def runner(num, user_obj)
     elsif num.to_i == 4
         stock_adder_platform
     elsif num.to_i == 5
+        5.times do 
+            puts "      "
+        end 
         puts "Thanks for using our platform! Goodbye!"
+        print_logo
     else 
-        puts "goodbye"
+        puts "GOODBYE!"
+        print_logo
     end 
 end 
 
