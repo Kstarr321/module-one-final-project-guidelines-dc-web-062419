@@ -56,6 +56,9 @@ def new_user_protocol(answer)
         actual_funds = ask_for_funds
         new_user = create_new_user(actual_name, actual_username, actual_funds)
         puts "Congratulations #{new_user.name}, you now have an account and may log into our platform!"
+        user_obj = username_checker#####################
+        user_menu_opt = display_menu ###################
+        runner(user_menu_opt, user_obj)################
     end 
 
 end 

@@ -169,6 +169,11 @@ def runner(num, user_obj)
     end 
 end 
 
+def existing_user_protocol ####################
+    user_obj = username_checker
+    user_menu_opt = display_menu 
+    runner(user_menu_opt, user_obj)
+end
 
 
 
