@@ -1,8 +1,10 @@
 require 'pastel'
-def return_stock_tickers
+def return_stock_tickers(user_obj) 
     Stock.all.each do |stock|
         puts "#{stock.ticker.upcase} >>>>> $#{stock.price}/share" 
     end 
+    user_menu_opt = display_menu 
+    runner(user_menu_opt, user_obj)
 end  
 
 def print_logo
@@ -25,7 +27,7 @@ def greeting
     puts pastel.decorate("Hello, welcome to Kolton's Stock Exchange".upcase, :bright_white, :on_black, :bold)
     puts pastel.decorate("_________________________________________", :on_bright_green, :bold)
     puts pastel.decorate("_________________________________________", :on_bright_cyan, :bold)
-    puts pastel.decorate("_________________________________________", :on_bright_red, :bold)
+    puts pastel.decorate("_________________________________________", :on_bright_red, :bold)    
     puts "                                         "
 end 
 
@@ -44,11 +46,7 @@ def prompt
         puts 'Invalid Input'
     end 
 end 
-# prompt that asks the user if they already have an account....if they do...put them through the user_name checker method. 
-# if they dont....i will ask them if they want to create a user id...if not then i will end the program
-# if they do want to create one....I will ask them for a username, a name, and how much they would like to start their account with..
-# then i will create the new user and save them to the database with the approprate information and then put them through the u
-# username checker method 
+
 def username_checker
     pastel = Pastel.new
     user_obj = nil 
@@ -65,8 +63,15 @@ def username_checker
         user_obj
 end 
 
+def spacer 
+    5.times do 
+        puts ""
+    end
+end 
 def display_menu
-    puts "Please make a selection from the menu below!"
+    pastel = Pastel.new
+    spacer
+    puts pastel.decorate("Please make a selection from the menu below:".upcase, :cyan, :bold)
     puts "___________________________________________"
 
     puts "1. Show list of stocks to choose from"
@@ -86,22 +91,27 @@ def stock_mover_menu
 end 
 
 def stock_buyer(user_obj)
+    pastel = Pastel.new
     puts "Please enter a lowercase 4-letter ticker symbol of what you would like to buy: "
     ticker = gets.chomp
-    
     user_obj.buy_stock(ticker)
     puts "                        "
     puts "                        "
-    puts "Order Confirmation: #{ticker.upcase}(BUY 1 SH) >>>>>> COMPLETE"
+    confirm = pastel.decorate("#{ticker.upcase}(BUY 1 SH) >>>>>> COMPLETE", :green, :bold) 
+    puts pastel.decorate("Order Confirmation:  ", :bright_white, :bold) + confirm
+    existing_user_run(user_obj)
 end
 
 def stock_seller(user_obj)
+    pastel = Pastel.new
     puts "Please enter a lowercase 4-letter ticker symbol that you own to sell_all"
     ticker = gets.chomp 
     user_obj.sell_all_stock(ticker)
     puts "                        "
     puts "                        "
-    puts "Order Confirmation: #{ticker.upcase}(SELL ALL) >>>>>> COMPLETE"
+    confirm = pastel.decorate("#{ticker.upcase}(SELL ALL) >>>>>> COMPLETE", :green, :bold) 
+    puts pastel.decorate("Order Confirmation:  ", :bright_white, :bold) + confirm
+    existing_user_run(user_obj)
 end 
 
 def stock_mover(obj)
@@ -114,6 +124,7 @@ def stock_mover(obj)
         stock_seller(obj)
     else 
         puts "Invalid Input"
+        existing_user_run(obj) 
     end 
 end 
 
@@ -130,12 +141,13 @@ def stock_adder(symbol)
     end 
 end 
 
-def stock_adder_platform
+def stock_adder_platform(user_obj)############################
     pastel = Pastel.new
     puts pastel.decorate("<<<<<Welcome to the StockAdder Platform>>>>>".upcase, :bright_white, :bold)
     puts "If there is a stock that is not offered on our platform, please enter the 4 letter ticker symbol and we will add it: "
     input = gets.chomp 
     stock_adder(input)
+    existing_user_run(user_obj)############################
 end 
 
 
@@ -146,17 +158,18 @@ def runner(num, user_obj)
     if num.to_i == nil 
         puts "Sorry....that is an incorrect input"
     elsif num.to_i == 1 
-        return_stock_tickers
+        return_stock_tickers(user_obj)
     elsif num.to_i == 2 
         stock_mover(user_obj)
     elsif num.to_i == 3 
         if user_obj.stocks.empty?
             puts "Whoops! It looks like you don't own any stocks!"
         else 
-            user_obj.show_owned_stocks 
+            user_obj.show_owned_stocks
+            existing_user_run(user_obj) 
         end 
     elsif num.to_i == 4
-        stock_adder_platform
+        stock_adder_platform(user_obj)#######################
     elsif num.to_i == 5
         5.times do 
             puts "      "
@@ -169,11 +182,17 @@ def runner(num, user_obj)
     end 
 end 
 
-def existing_user_protocol ####################
+def existing_user_protocol 
     user_obj = username_checker
     user_menu_opt = display_menu 
     runner(user_menu_opt, user_obj)
 end
+
+def existing_user_run(user_obj)
+    user_menu_opt = display_menu 
+    runner(user_menu_opt, user_obj)
+end 
+
 
 
 
