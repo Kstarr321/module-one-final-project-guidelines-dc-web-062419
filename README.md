@@ -61,8 +61,7 @@ ActiveRecord::Base.logger = nil
 
 
 
-# problems I currently have 
-  #- there is no looping construct to keep the application running when given an invalid input 
+# problems I currently have  
   #- when/where/ and how to wrap my methods together for a smooth program launch
   #- a way to create a user if the username does not currently exist 
   #- 
