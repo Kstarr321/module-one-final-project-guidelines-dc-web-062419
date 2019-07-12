@@ -77,7 +77,7 @@ def display_menu
     puts "3. Show list of owned stocks"
     puts "4. Go to StockAdder Platform"
     puts "5. End program"
-    input = gets.chomp
+    input = gets.strip
 end 
 
 def stock_mover_menu
@@ -91,19 +91,33 @@ end
 def stock_buyer(user_obj)
     pastel = Pastel.new
     puts "Please enter a lowercase 4-letter ticker symbol of what you would like to buy: "
-    ticker = gets.chomp
+    ticker = gets.strip
+    stock = Stock.find_by ticker: ticker 
+    
+    while stock == nil do ###################################
+        puts "Please enter a VALID 4 letter ticker symbol to add"
+        ticker = gets.strip 
+        stock = Stock.find_by ticker: ticker
+    end 
+    
     user_obj.buy_stock(ticker)
     puts "                        "
     puts "                        "
     confirm = pastel.decorate("#{ticker.upcase}(BUY 1 SH) >>>>>> COMPLETE", :green, :bold) 
     puts pastel.decorate("Order Confirmation:  ", :bright_white, :bold) + confirm
     existing_user_run(user_obj)
+    
 end
 
 def stock_seller(user_obj)
     pastel = Pastel.new
     puts "Please enter a lowercase 4-letter ticker symbol that you own to sell_all"
-    ticker = gets.chomp 
+    ticker = gets.strip 
+    while !user_obj.stocks.include? Stock.find_by ticker: ticker  do 
+        puts "You don't own that stock...pleas enter one that you own"
+        ticker = gets.strip 
+    end 
+    
     user_obj.sell_all_stock(ticker)
     puts "                        "
     puts "                        "
@@ -115,7 +129,7 @@ end
 def stock_mover(obj)
     stock_mover_menu
     
-    opt = gets.chomp 
+    opt = gets.strip 
     if opt == 'buy'
         stock_buyer(obj)
     elsif opt == 'sell'
@@ -143,13 +157,10 @@ def stock_adder_platform(user_obj)############################
     pastel = Pastel.new
     puts pastel.decorate("<<<<<Welcome to the StockAdder Platform>>>>>".upcase, :bright_white, :bold)
     puts "If there is a stock that is not offered on our platform, please enter the 4 letter ticker symbol and we will add it: "
-    input = gets.chomp 
+    input = gets.strip 
     stock_adder(input)
     existing_user_run(user_obj)############################
 end 
-
-
-
 
 def runner(num, user_obj)
     pastel = Pastel.new
@@ -162,7 +173,9 @@ def runner(num, user_obj)
         stock_mover(user_obj)
     elsif num.to_i == 3 
         if user_obj.stocks.empty?
+            spacer
             puts "Whoops! It looks like you don't own any stocks!"
+            existing_user_run(user_obj)
         else 
             user_obj.show_owned_stocks
             existing_user_run(user_obj) 
