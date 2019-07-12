@@ -97,7 +97,7 @@ def stock_buyer(user_obj)
     ticker = gets.strip
     stock = Stock.find_by ticker: ticker 
     
-    while stock == nil do ###################################
+    while stock == nil do 
         puts "Please enter a VALID 4 letter ticker symbol to add"
         ticker = gets.strip 
         stock = Stock.find_by ticker: ticker

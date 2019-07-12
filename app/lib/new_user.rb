@@ -1,8 +1,10 @@
 require_relative "methods.rb"
 def create?
+    pastel = Pastel.new
     puts " "
     puts " "
-    puts "Would you like to create an account? y/n"
+    yn = pastel.decorate("y / n", :bright_cyan, :bold)
+    puts "Would you like to create an account? #{yn}"
     input = gets.strip
     while input != "y" && input != "n" do 
         puts "invalid input...please enter 'y' or 'n'"
@@ -13,6 +15,7 @@ end
 
 # Returns a string that is a name 
 def ask_name
+    pastel = Pastel.new 
     puts "Great! What is your name?"
     name = gets.strip
     while name.to_i != 0 do
@@ -20,12 +23,14 @@ def ask_name
         name = gets.strip
     end 
     spacer
-    puts "Nice to meet you #{name}!"
+    boom = pastel.decorate("#{name}", :bright_green, :bold)
+    puts "Nice to meet you #{boom}!"
     spacer
     name
 end 
 
 def ask_for_username 
+    pastel = Pastel.new
     puts "What would you like your username to be? (10 characters or less)"
     username = gets.strip
     while username.length > 10 do 
@@ -39,6 +44,7 @@ end
 
 #Returns an integer of the amount of money
 def ask_for_funds
+    pastel = Pastel.new
     puts "Please fund your account >>> enter an amount less than $20,000 (no symbols, no commas)"
     money = gets.strip.to_i
     while money > 20000 || money == 0 do 

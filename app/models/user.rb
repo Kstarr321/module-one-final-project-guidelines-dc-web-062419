@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
    end 
 
    def show_owned_stocks
-     a = self.stocks.each {|stock| puts "#{stock.ticker.upcase} >> Price: $#{stock.price}"}
+      x = User.find(self.id)
+     a = x.stocks.each {|stock| puts "#{stock.ticker.upcase} >> Price: $#{stock.price}"}
    end 
 
 end
