@@ -14,7 +14,7 @@ def print_logo
         { name: 'POSITIVITY', value: 1, color: :bright_white, fill: 'X' },
         { name: 'HARD WORK', value: 1, color: :bright_cyan, fill: 'X' }
       ]
-      pie_chart = TTY::Pie.new(data: data, left: 50, top: 10)
+      pie_chart = TTY::Pie.new(data: data, radius: 5)
       print pie_chart
 
 end 
@@ -35,16 +35,14 @@ def no_username_error
     puts "Sorry...we couldn't find that username. Program ending......."
 end
 
-def prompt
+def prompt ################### Add the ability for 'yes' and 'no' also downcase it
     puts "Are you currently an existing user? y/n"
-    input = gets.chomp #this will be a string of one letter 'y' or 'n'
-    if input == 'y'
-        return 'y'
-    elsif input == 'n'
-        return 'n'
-    else 
-        puts 'Invalid Input'
+    input = gets.strip.downcase
+    while input != "y" && input != "n" do 
+        puts "invalid input...please enter 'y' or 'n'"
+        input = gets.strip.downcase
     end 
+    input
 end 
 
 def username_checker
@@ -52,7 +50,7 @@ def username_checker
     user_obj = nil 
     while user_obj == nil do 
         puts "What is your username?"
-        user_input = gets.chomp 
+        user_input = gets.strip
         user_obj = User.find_by username: user_input
         break if user_input == "stop"
     end
@@ -155,6 +153,7 @@ end
 
 def runner(num, user_obj)
     pastel = Pastel.new
+    
     if num.to_i == nil 
         puts "Sorry....that is an incorrect input"
     elsif num.to_i == 1 
@@ -169,16 +168,17 @@ def runner(num, user_obj)
             existing_user_run(user_obj) 
         end 
     elsif num.to_i == 4
-        stock_adder_platform(user_obj)#######################
+        stock_adder_platform(user_obj)
     elsif num.to_i == 5
         5.times do 
             puts "      "
         end 
-        puts "Thanks for using our platform! Goodbye!"
+        puts pastel.decorate("Thanks for using our platform! Goodbye!", :bright_white, :bold)
         print_logo
     else 
-        puts "GOODBYE!"
-        print_logo
+        spacer 
+        puts pastel.decorate("INVALID INPUT >>>> Returning you to Main Menu", :bright_red)
+        existing_user_run(user_obj)
     end 
 end 
 

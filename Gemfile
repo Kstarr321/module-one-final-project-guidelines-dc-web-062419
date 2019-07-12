@@ -12,5 +12,7 @@ gem 'database_cleaner'
 gem 'faker'
 gem 'pastel'
 gem 'tty-pie'
+gem 'rest-client'
+gem 'json'
 
 # what other gems do i need to install? 
