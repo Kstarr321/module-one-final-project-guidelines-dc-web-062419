@@ -1,30 +1,5 @@
 require 'faker'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #50.times do 
     #Stock.create(
         #ticker: (Faker::Alphanumeric.alpha 4), 

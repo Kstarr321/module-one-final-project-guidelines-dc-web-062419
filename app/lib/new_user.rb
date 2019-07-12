@@ -1,5 +1,7 @@
-# Returns a string that is either 'y' or 'n'
+require_relative "methods.rb"
 def create?
+    puts " "
+    puts " "
     puts "Would you like to create an account? y/n"
     input = gets.strip
     while input != "y" && input != "n" do 
@@ -53,8 +55,12 @@ end
 
 #This method puts it all together in one nice wrapper 
 def new_user_protocol(answer)
+    pastel = Pastel.new 
     if answer == "n"
-        puts "Okay...well you can't login to someone else's account so....goodbye!"
+        puts " "
+        puts " "
+        puts pastel.decorate(">>>>>>>Goodbye!>>>>>>>".upcase, :bright_white, :bold)
+        print_logo
     else 
         actual_name = ask_name
         actual_username = ask_for_username

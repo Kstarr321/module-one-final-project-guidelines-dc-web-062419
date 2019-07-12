@@ -2,7 +2,10 @@ require 'pastel'
 def return_stock_tickers(user_obj) 
     Stock.all.each do |stock|
         puts "#{stock.ticker.upcase} >>>>> $#{stock.price}/share" 
+        
     end 
+    puts ""
+    puts "Returning you to main menu....."
     user_menu_opt = display_menu 
     runner(user_menu_opt, user_obj)
 end  
@@ -72,11 +75,11 @@ def display_menu
     puts pastel.decorate("Please make a selection from the menu below:".upcase, :cyan, :bold)
     puts "___________________________________________"
 
-    puts "1. Show list of stocks to choose from"
-    puts "2. Go to StockMover Platform"
-    puts "3. Show list of owned stocks"
-    puts "4. Go to StockAdder Platform"
-    puts "5. End program"
+    puts pastel.decorate("1. Show ALL stocks offered", :bright_white)
+    puts pastel.decorate("2. Go to Stock Buyer/Seller Platform", :bright_white)
+    puts pastel.decorate("3. Show your Owned Stocks", :bright_white)
+    puts pastel.decorate("4. Go to StockAdder Platform", :bright_white)
+    puts pastel.decorate("5. End program", :bright_white)
     input = gets.strip
 end 
 

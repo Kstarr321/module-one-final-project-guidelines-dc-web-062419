@@ -19,15 +19,20 @@ BOOKS = "https://www.googleapis.com/books/v1/volumes?q=finance"
 def get_book_info(url)
     response = RestClient.get(url)
     json = JSON.parse(response)
-    items = json["items"]
+    items = json["items"] # an array of hashes
     
 end
 
-books_hash = get_book_info(BOOKS) # the return value of this is a huge hash 
-# book[0]["volumeInfo"]["title"] #"authors" "description" "pageCount" "averageRating" "categories"
-def get_categories(book)
-end 
+# book_arr = get_book_info(BOOKS) 
+# def get_authors(arr)
+#     vol = arr.select do |hash|
+#         hash["volumeInfo"]
+#     end 
+#     binding.pry
+# end 
 
-get_categories(books_hash)
+# get_authors(book_arr)
+# book[0]["volumeInfo"]["title"] #"authors" "description" "pageCount" "averageRating" "categories"
+
 
 #id, title, author, pagecount, price 
